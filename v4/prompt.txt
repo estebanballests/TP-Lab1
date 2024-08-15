@@ -1,0 +1,4 @@
+Cree una página web para registrar el
+número de medallas de los juegos olímpicos, utilice bootstrap para los estilos.
+Las medallas deben almacenarse en una base de datos. Utilice java para la
+conexión con la base de datos H2.
