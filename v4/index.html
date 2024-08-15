@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Medallas Olímpicas</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a estilos personalizados (opcional) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-3">
+        <h1>Registro de Medallas Olímpicas</h1>
+    </header>
+
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <section id="formulario">
+                    <h2 class="mb-4">Registrar Medallas</h2>
+                    <form id="medal-form" action="MedalServlet" method="post">
+                        <div class="form-group">
+                            <label for="pais">País:</label>
+                            <input type="text" class="form-control" id="pais" name="pais" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="oro">Oro:</label>
+                            <input type="number" class="form-control" id="oro" name="oro" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="plata">Plata:</label>
+                            <input type="number" class="form-control" id="plata" name="plata" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bronce">Bronce:</label>
+                            <input type="number" class="form-control" id="bronce" name="bronce" min="0" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </form>
+                </section>
+            </div>
+
+            <div class="col-md-6">
+                <section id="tabla-medallas">
+                    <h2 class="mb-4">Medallas Registradas</h2>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>País</th>
+                                <th>Oro</th>
+                                <th>Plata</th>
+                                <th>Bronce</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medal-tbody">
+                            <!-- Las filas se agregarán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Enlace a jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Enlace a Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Función para cargar datos en la tabla
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('MedalServlet?operation=get')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('medal-tbody');
+                    data.forEach(row => {
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+                            <td>${row.pais}</td>
+                            <td>${row.oro}</td>
+                            <td>${row.plata}</td>
+                            <td>${row.bronce}</td>
+                        `;
+                        tableBody.appendChild(newRow);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
