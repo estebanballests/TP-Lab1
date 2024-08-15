@@ -1,2 +1,2 @@
 Cree una página web para registrar el
-número de medallas de los juegos olímpicos
+número de medallas de los juegos olímpicos.
