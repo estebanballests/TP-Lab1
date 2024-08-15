@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Medallas Olímpicas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Registro de Medallas Olímpicas</h1>
+    </header>
+
+    <main>
+        <section id="formulario">
+            <h2>Registrar Medallas</h2>
+            <form id="medal-form">
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" required>
+                
+                <label for="oro">Oro:</label>
+                <input type="number" id="oro" name="oro" min="0" required>
+                
+                <label for="plata">Plata:</label>
+                <input type="number" id="plata" name="plata" min="0" required>
+                
+                <label for="bronce">Bronce:</label>
+                <input type="number" id="bronce" name="bronce" min="0" required>
+                
+                <button type="submit">Registrar</button>
+            </form>
+        </section>
+
+        <section id="tabla-medallas">
+            <h2>Medallas Registradas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>País</th>
+                        <th>Oro</th>
+                        <th>Plata</th>
+                        <th>Bronce</th>
+                    </tr>
+                </thead>
+                <tbody id="medal-tbody">
+                    <!-- Las filas se agregarán dinámicamente aquí -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('medal-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const pais = document.getElementById('pais').value;
+            const oro = document.getElementById('oro').value;
+            const plata = document.getElementById('plata').value;
+            const bronce = document.getElementById('bronce').value;
+
+            const tablaBody = document.getElementById('medal-tbody');
+            const nuevaFila = document.createElement('tr');
+
+            nuevaFila.innerHTML = `
+                <td>${pais}</td>
+                <td>${oro}</td>
+                <td>${plata}</td>
+                <td>${bronce}</td>
+            `;
+
+            tablaBody.appendChild(nuevaFila);
+
+            // Limpiar el formulario
+            document.getElementById('medal-form').reset();
+        });
+    </script>
+</body>
+</html>
